@@ -1,5 +1,5 @@
 """
-URL configuration for task2 project.
+URL configuration for sk20 project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.2/topics/http/urls/
@@ -16,9 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
+from skapp import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('taskapp2.urls'))
-    
+    path('', views.add_show, name='add_show'),
+    path('delete/<int:id>/', views.Delet_data, name='delete_data'),
+    path('<int:id>/', views.update_data, name='update_data'),
+    path('api/',include('skapp.Api.urls'))
 ]
