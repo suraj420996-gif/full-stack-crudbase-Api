@@ -1,0 +1,38 @@
+{% extends 'enroll/base.html' %}
+{% block content %}
+    <div class="severdata>"
+         <h3>add student</h3>
+         <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Add</button>
+    </div>
+    <div class="showdata">
+        <h3>show student</h3>
+        <table border="1">
+            <tr> 
+                  <th>id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Actions</th>
+            </tr>
+            {% for i in User_data %}
+            <tr>
+                 <td>{{ i.id }}</td>
+                <td>{{ i.name }}</td>
+                <td>{{ i.email }}</td>
+                <td>{{ i.password }}</td>
+                <td>
+                    <a href="{% url "update_data" i.id %}">Update</a>
+                    <form  action="{% url 'delete_data' i.id %}" method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+
+            </tr>
+            {% endfor %}
+        </table>
+
+{% endblock %}
